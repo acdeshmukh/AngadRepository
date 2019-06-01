@@ -29,11 +29,7 @@ pipeline {
 									}
 						}
 						stage('Four-2') {
-								agent {
-										docker{
-										reuseNode false
-										image 'ubuntu'}
-										}
+								
 									steps {
 										echo 'Declarative:Satge Four -2'
 									}
