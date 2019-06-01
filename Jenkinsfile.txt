@@ -1,0 +1,46 @@
+pipeline {
+		agent any
+		stages{
+			stage('one') {
+						steps{
+							echo 'Declarative :Stage 1'
+						}
+			}
+			stage('two') {
+						steps{
+							input 'Declarative :Do you want to continue?'
+							
+						}
+			
+			}
+			
+			stage('three') {
+						when { not {branch "master"} }
+						steps {
+							echo  'Declarative : if branch is not master'
+						}
+			}
+		
+			stage('four'){
+						parallel {
+						stage('Four-1'){
+									steps {
+										echo 'Declarative:Satge Four -1'
+									}
+						}
+						stage('Four-2') {
+								agent {
+										docker{
+										reuseNode false
+										image 'ubuntu'}
+										}
+									steps {
+										echo 'Declarative:Satge Four -2'
+									}
+						}
+						
+						}
+			}
+		}
+
+}
